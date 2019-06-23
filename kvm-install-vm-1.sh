@@ -114,7 +114,7 @@ _EOF_
 
 
 if [ $# -eq 1 ]; then
-    echo "local-hostname: $1";local-hostname: $1 > $META_DATA
+    echo "local-hostname: $1;local-hostname: $1" > $META_DATA
 else
     cat > $META_DATA << _EOF_
 instance-id: $1
