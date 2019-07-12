@@ -3,32 +3,7 @@
 ## **Updates to this file are now at https://github.com/giovtorres/kvm-install-vm.**
 ## **This updated version has more options and less hardcoded variables.**
 
-# Take one argument from the commandline: VM name
-# Take second argment for IP address
-if [ $# -eq 0 ]; then
-    echo "Usage: $0 <node-name> [ipaddress]"
-    exit 1
-elif [ $# -eq 2 ]; then
-    echo "Create VM with fixed IP: $2"
-else
-    echo "Create VM with DHCP IP"    
-fi
-
-
-# Check if domain already exists
-virsh dominfo $1 > /dev/null 2>&1
-if [ "$?" -eq 0 ]; then
-    echo -n "[WARNING] $1 already exists.  "
-    read -p "Do you want to overwrite $1 (y/[N])? " -r
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo ""
-        virsh destroy $1 > /dev/null
-        virsh undefine $1 > /dev/null
-    else
-        echo -e "\nNot overwriting $1. Exiting..."
-        exit 1
-    fi
-fi
+# Define some constants
 
 # Directory to store images
 DIR=`pwd`
@@ -50,6 +25,39 @@ DISK=$1.qcow2
 
 # Bridge for VMs (default on Fedora is virbr0)
 BRIDGE=virbr0
+
+
+# Take one argument from the commandline: VM name
+# Take second argment for IP address
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <node-name> [ipaddress]"
+    exit 1
+elif [ $# -eq 2 ]; then
+    echo "Create VM with fixed IP: $2"
+elif [ $# -eq 3 ]; then
+    echo "Create VM with new Bridge: $3"
+    BRIDGE    
+else
+    echo "Create VM with DHCP IP on Bridge $BRIDGE"    
+fi
+
+
+# Check if domain already exists
+virsh dominfo $1 > /dev/null 2>&1
+if [ "$?" -eq 0 ]; then
+    echo -n "[WARNING] $1 already exists.  "
+    read -p "Do you want to overwrite $1 (y/[N])? " -r
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo ""
+        virsh destroy $1 > /dev/null
+        virsh undefine $1 > /dev/null
+    else
+        echo -e "\nNot overwriting $1. Exiting..."
+        exit 1
+    fi
+fi
+
+
 
 # Start clean
 rm -rf $DIR/tmp/$1

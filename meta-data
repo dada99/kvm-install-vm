@@ -1,8 +1,1 @@
-instance-id: 
-local-hostname: 
-network-interfaces: |
-  iface ens3 inet static
-  address 192.168.122.40
-  netmask 255.255.255.0
-  broadcast 192.168.122.255
-  gateway 192.168.122.1
+local-hostname: test1;local-hostname: test1
