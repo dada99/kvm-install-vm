@@ -2,7 +2,7 @@
 
 # Hostname management
 preserve_hostname: False
-hostname: test1
+hostname: ubuntu-k8s-new-master 192.168.122.11
 #fqdn: .example.local
 
 # Remove cloud-init when finished with it
@@ -22,7 +22,7 @@ ssh_genkeytypes: ['rsa']
 # Install my public ssh key to the first user-defined user configured 
 # in cloud.cfg in the template (which is centos for CentOS cloud images)
 ssh_authorized_keys:
-  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMTHt6tBbe3t4uQ3QY8CiZhc4RWWoe58LKZbWzIHwWJ9zA5Hh1lLi16+9cmx475UTjj2nhFy285ovxmxXtrKlcslAkWIgFoDp3CTEuZ5GYOrW9QN8XQbkG6q+p7YqgWmDsXGopTQy1O3tRUqnc+5Np7fOXkTkk9W82zUDW1xyOxel7nF968msW1gvxxu3aokGPdZ+/C46Z5TQVdVV4LcQLqieV+NTqCMowhMTUDPfLPXvT43DBdzhtYpYaAdU11VPvVy//xtVxfSmfGK4SufhGydhkZzdvs52vbn8NPHyw7TLvhJrgnU4N+ZNxGLW2aXn4FEcJjsSIJtKJ+ej74bF/ dada99@dada99-pc
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPiCS4NnokmNJ0i7mEkaJqQuCbnCk8MvL+K1FhfTueUkpYGIZHAt0xGRSLO9EvxIYMaOq9abWOj4RlHwbMBMF7JRzYebSIbjIa8WWDUBFgDUF/SpDqPJ+bns7JtKPbvPTWyUcoL1pcQs4TAqkrJYvWDXpTeCZKE2+N6TQgncOaFWwtqH0GT07cU2xSIrG3fcuIviDhQziPIAj1PvzLILuinFWHyTm5oUCc2djJz45Z0rIT6m9LYPE1Y3ysDMnnxdt40zsBvB9YjWRcj2mBGG9tgPY2Xgj8udT+M2drxYfXcCiIzivvdtc0BgnTDG0uQFpneQM5i533Y8o/kqnITmtT dada99@dada99-pc
 ssh_pwauth: True
 users: 
   - default  #If not set, default user(ubuntu) will not be created
@@ -30,7 +30,7 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
     lock_passwd: false
     ssh_authorized_keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMTHt6tBbe3t4uQ3QY8CiZhc4RWWoe58LKZbWzIHwWJ9zA5Hh1lLi16+9cmx475UTjj2nhFy285ovxmxXtrKlcslAkWIgFoDp3CTEuZ5GYOrW9QN8XQbkG6q+p7YqgWmDsXGopTQy1O3tRUqnc+5Np7fOXkTkk9W82zUDW1xyOxel7nF968msW1gvxxu3aokGPdZ+/C46Z5TQVdVV4LcQLqieV+NTqCMowhMTUDPfLPXvT43DBdzhtYpYaAdU11VPvVy//xtVxfSmfGK4SufhGydhkZzdvs52vbn8NPHyw7TLvhJrgnU4N+ZNxGLW2aXn4FEcJjsSIJtKJ+ej74bF/ dada99@dada99-pc
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPiCS4NnokmNJ0i7mEkaJqQuCbnCk8MvL+K1FhfTueUkpYGIZHAt0xGRSLO9EvxIYMaOq9abWOj4RlHwbMBMF7JRzYebSIbjIa8WWDUBFgDUF/SpDqPJ+bns7JtKPbvPTWyUcoL1pcQs4TAqkrJYvWDXpTeCZKE2+N6TQgncOaFWwtqH0GT07cU2xSIrG3fcuIviDhQziPIAj1PvzLILuinFWHyTm5oUCc2djJz45Z0rIT6m9LYPE1Y3ysDMnnxdt40zsBvB9YjWRcj2mBGG9tgPY2Xgj8udT+M2drxYfXcCiIzivvdtc0BgnTDG0uQFpneQM5i533Y8o/kqnITmtT dada99@dada99-pc
 chpasswd:  # If not set, the system will ask you to setup password for default user
   list: |
     dada99:passw0rd

@@ -9,10 +9,10 @@
 DIR=`pwd`
 
 # Location of cloud image
-IMAGE=$DIR/xenial-server-cloudimg-amd64-disk1.img
+IMAGE=$DIR/xenial-server-cloudimg-amd64-disk1-5G.img
 
 # Amount of RAM in MB
-MEM=1024
+MEM=2048
 
 # Number of virtual CPUs
 CPUS=1
@@ -57,7 +57,7 @@ if [ "$?" -eq 0 ]; then
     fi
 fi
 
-
+echo $2
 
 # Start clean
 rm -rf $DIR/tmp/$1
@@ -101,7 +101,7 @@ ssh_genkeytypes: ['rsa']
 # Install my public ssh key to the first user-defined user configured 
 # in cloud.cfg in the template (which is centos for CentOS cloud images)
 ssh_authorized_keys:
-  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMTHt6tBbe3t4uQ3QY8CiZhc4RWWoe58LKZbWzIHwWJ9zA5Hh1lLi16+9cmx475UTjj2nhFy285ovxmxXtrKlcslAkWIgFoDp3CTEuZ5GYOrW9QN8XQbkG6q+p7YqgWmDsXGopTQy1O3tRUqnc+5Np7fOXkTkk9W82zUDW1xyOxel7nF968msW1gvxxu3aokGPdZ+/C46Z5TQVdVV4LcQLqieV+NTqCMowhMTUDPfLPXvT43DBdzhtYpYaAdU11VPvVy//xtVxfSmfGK4SufhGydhkZzdvs52vbn8NPHyw7TLvhJrgnU4N+ZNxGLW2aXn4FEcJjsSIJtKJ+ej74bF/ dada99@dada99-pc
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPiCS4NnokmNJ0i7mEkaJqQuCbnCk8MvL+K1FhfTueUkpYGIZHAt0xGRSLO9EvxIYMaOq9abWOj4RlHwbMBMF7JRzYebSIbjIa8WWDUBFgDUF/SpDqPJ+bns7JtKPbvPTWyUcoL1pcQs4TAqkrJYvWDXpTeCZKE2+N6TQgncOaFWwtqH0GT07cU2xSIrG3fcuIviDhQziPIAj1PvzLILuinFWHyTm5oUCc2djJz45Z0rIT6m9LYPE1Y3ysDMnnxdt40zsBvB9YjWRcj2mBGG9tgPY2Xgj8udT+M2drxYfXcCiIzivvdtc0BgnTDG0uQFpneQM5i533Y8o/kqnITmtT dada99@dada99-pc
 ssh_pwauth: True
 users: 
   - default  #If not set, default user(ubuntu) will not be created
@@ -109,7 +109,7 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
     lock_passwd: false
     ssh_authorized_keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMTHt6tBbe3t4uQ3QY8CiZhc4RWWoe58LKZbWzIHwWJ9zA5Hh1lLi16+9cmx475UTjj2nhFy285ovxmxXtrKlcslAkWIgFoDp3CTEuZ5GYOrW9QN8XQbkG6q+p7YqgWmDsXGopTQy1O3tRUqnc+5Np7fOXkTkk9W82zUDW1xyOxel7nF968msW1gvxxu3aokGPdZ+/C46Z5TQVdVV4LcQLqieV+NTqCMowhMTUDPfLPXvT43DBdzhtYpYaAdU11VPvVy//xtVxfSmfGK4SufhGydhkZzdvs52vbn8NPHyw7TLvhJrgnU4N+ZNxGLW2aXn4FEcJjsSIJtKJ+ej74bF/ dada99@dada99-pc
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPiCS4NnokmNJ0i7mEkaJqQuCbnCk8MvL+K1FhfTueUkpYGIZHAt0xGRSLO9EvxIYMaOq9abWOj4RlHwbMBMF7JRzYebSIbjIa8WWDUBFgDUF/SpDqPJ+bns7JtKPbvPTWyUcoL1pcQs4TAqkrJYvWDXpTeCZKE2+N6TQgncOaFWwtqH0GT07cU2xSIrG3fcuIviDhQziPIAj1PvzLILuinFWHyTm5oUCc2djJz45Z0rIT6m9LYPE1Y3ysDMnnxdt40zsBvB9YjWRcj2mBGG9tgPY2Xgj8udT+M2drxYfXcCiIzivvdtc0BgnTDG0uQFpneQM5i533Y8o/kqnITmtT dada99@dada99-pc
 chpasswd:  # If not set, the system will ask you to setup password for default user
   list: |
     dada99:passw0rd
@@ -151,13 +151,14 @@ fi
     echo "$(date -R) Installing the domain and adjusting the configuration..."
     echo "[INFO] Installing with the following parameters:"
     echo "virt-install --import --name $1 --ram $MEM --vcpus $CPUS --disk
-    $DISK,format=qcow2,bus=virtio --disk $CI_ISO,device=cdrom --network
+    $DISK,format=qcow2,bus=virtio --disk $CI_ISO,device=cdrom,size=1M--network
     bridge=virbr0,model=virtio --os-type=linux --os-variant=ubuntu16.04 --noautoconsole"
 
     virt-install --import --name $1 --ram $MEM --vcpus $CPUS --disk \
     $DISK,format=qcow2,bus=virtio --disk $CI_ISO,device=cdrom --network \
     bridge=virbr0,model=virtio --os-type=linux --os-variant=ubuntu16.04 --noautoconsole
-    
+
+       
 
 if [ $# -eq 1 ]; then
     echo "Get DHCP IP"
