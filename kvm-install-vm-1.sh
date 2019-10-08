@@ -15,7 +15,7 @@ IMAGE=$DIR/xenial-server-cloudimg-amd64-disk1-5G.img
 MEM=2048
 
 # Number of virtual CPUs
-CPUS=1
+CPUS=2
 
 # Cloud init files
 USER_DATA=user-data
