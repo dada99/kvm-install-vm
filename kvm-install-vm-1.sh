@@ -1,6 +1,5 @@
 #!/bin/bash
-
-## **Updates to this file are now at https://github.com/giovtorres/kvm-install-vm.**
+# **Updates to this file are now at https://github.com/giovtorres/kvm-install-vm.**
 ## **This updated version has more options and less hardcoded variables.**
 
 # Define some constants
