@@ -154,21 +154,21 @@ fi
     if [ "$3" = "" ]; then
     echo "virt-install --import --name $1 --ram $MEM --vcpus $CPUS --disk     
     $DISK,format=qcow2,bus=virtio --disk $CI_ISO,device=cdrom,size=1M--network
-    bridge=virbr0,model=virtio --os-type=linux --os-variant=ubuntu16.04 --noautoconsole"
+    bridge=$BRIDGE,model=virtio --os-type=linux --os-variant=ubuntu16.04 --noautoconsole"
     virt-install --import --name $1 --ram $MEM --vcpus $CPUS --disk \
     $DISK,format=qcow2,bus=virtio --disk $CI_ISO,device=cdrom --network \
-    bridge=virbr0,model=virtio --os-type=linux --os-variant=ubuntu16.04 --noautoconsole
+    bridge=$BRIDGE,model=virtio --os-type=linux --os-variant=ubuntu16.04 --noautoconsole
     else 
       echo "Create second disk for $1"
       qemu-img create -f qcow2 $1-2.qcow2 $3
       echo "virt-install --import --name $1 --ram $MEM --vcpus $CPUS --disk     
       $DISK,format=qcow2,bus=virtio --disk     
       $1-2.qcow2,format=qcow2,bus=virtio --disk $CI_ISO,device=cdrom,size=1M--network
-      bridge=virbr0,model=virtio --os-type=linux --os-variant=ubuntu16.04 --noautoconsole"
+      bridge=$BRIDGE,model=virtio --os-type=linux --os-variant=ubuntu16.04 --noautoconsole"
       virt-install --import --name $1 --ram $MEM --vcpus $CPUS --disk \
       $DISK,format=qcow2,bus=virtio --disk \
       $1-2.qcow2,format=qcow2,bus=virtio --disk $CI_ISO,device=cdrom --network \
-      bridge=virbr0,model=virtio --os-type=linux --os-variant=ubuntu16.04 --noautoconsole
+      bridge=$BRIDGE,model=virtio --os-type=linux --os-variant=ubuntu16.04 --noautoconsole
     fi
        
 
