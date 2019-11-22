@@ -123,12 +123,12 @@ users:
       - "$SSH_PUB_KEY"
 chpasswd:  # If not set, the system will ask you to setup password for default user
   list: |
-    dada99:passw0rd
     ubuntu:passw0rd
   expire: False
 bootcmd:
   - ifup ens3  # Bring up ens3 interface manually
   - echo "nameserver 223.5.5.5" >> /etc/resolv.conf
+  - echo "$1       $2" >> /etc/hosts
 _EOF_
 
 

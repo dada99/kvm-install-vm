@@ -1,0 +1,4 @@
+[k8s-lab-{{ groupnum }}]
+ubuntu-lab-{{ groupnum }}-master	ansible_ssh_host={{ groupip }}	ansible_user=ubuntu
+ubuntu-lab-{{ groupnum }}-worker-1	ansible_ssh_host={{ groupip+1 }}	ansible_user=ubuntu
+ubuntu-lab-{{ groupnum }}-worker-2	ansible_ssh_host={{ groupip+2 }}	ansible_user=ubuntu
