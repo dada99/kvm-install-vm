@@ -9,7 +9,7 @@
 DIR=`pwd`
 
 # Location of cloud image
-IMAGE=$DIR/xenial-server-cloudimg-amd64-disk1-5G.img
+IMAGE=$DIR/base_image/xenial-server-cloudimg-amd64-disk1-5G.img
 
 # Amount of RAM in MB
 MEM=2048
@@ -27,17 +27,27 @@ DISK=$1.qcow2
 # Bridge for VMs (default on Fedora is virbr0)
 BRIDGE=virbr0
 
+#SSH Public key file used to inject into VM
+SSH_PUB_KEY_FILE="$DIR/ssh_keys/id_rsa.pub"
+DIR=`pwd`
+SSH_PUB_KEY_FILE="$DIR/ssh_keys/id_rsa.pub"
+while IFS= read -r line
+do
+  #echo "$line"
+  SSH_PUB_KEY="$line"
+done < "$SSH_PUB_KEY_FILE"
+#echo $SSH_PUB_KEY
 
 # Take one argument from the commandline: VM name
 # Take second argment for IP address
+# Take third argment for second disk
 if [ $# -eq 0 ]; then
     echo "Usage: $0 <node-name> [ipaddress] [second_disk_size]"
     exit 1
 elif [ $# -eq 2 ]; then
     echo "Create VM with fixed IP: $2"
 elif [ $# -eq 3 ]; then
-    echo "Create VM with second disk is size of $3"
-        
+    echo "Create VM with second disk is size of $3"        
 else
     echo "Create VM with DHCP IP on Bridge $BRIDGE"    
 fi
@@ -102,7 +112,7 @@ ssh_genkeytypes: ['rsa']
 # Install my public ssh key to the first user-defined user configured 
 # in cloud.cfg in the template (which is centos for CentOS cloud images)
 ssh_authorized_keys:
-  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPiCS4NnokmNJ0i7mEkaJqQuCbnCk8MvL+K1FhfTueUkpYGIZHAt0xGRSLO9EvxIYMaOq9abWOj4RlHwbMBMF7JRzYebSIbjIa8WWDUBFgDUF/SpDqPJ+bns7JtKPbvPTWyUcoL1pcQs4TAqkrJYvWDXpTeCZKE2+N6TQgncOaFWwtqH0GT07cU2xSIrG3fcuIviDhQziPIAj1PvzLILuinFWHyTm5oUCc2djJz45Z0rIT6m9LYPE1Y3ysDMnnxdt40zsBvB9YjWRcj2mBGG9tgPY2Xgj8udT+M2drxYfXcCiIzivvdtc0BgnTDG0uQFpneQM5i533Y8o/kqnITmtT dada99@dada99-pc
+  - "$SSH_PUB_KEY"
 ssh_pwauth: True
 users: 
   - default  #If not set, default user(ubuntu) will not be created
@@ -110,7 +120,7 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
     lock_passwd: false
     ssh_authorized_keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPiCS4NnokmNJ0i7mEkaJqQuCbnCk8MvL+K1FhfTueUkpYGIZHAt0xGRSLO9EvxIYMaOq9abWOj4RlHwbMBMF7JRzYebSIbjIa8WWDUBFgDUF/SpDqPJ+bns7JtKPbvPTWyUcoL1pcQs4TAqkrJYvWDXpTeCZKE2+N6TQgncOaFWwtqH0GT07cU2xSIrG3fcuIviDhQziPIAj1PvzLILuinFWHyTm5oUCc2djJz45Z0rIT6m9LYPE1Y3ysDMnnxdt40zsBvB9YjWRcj2mBGG9tgPY2Xgj8udT+M2drxYfXcCiIzivvdtc0BgnTDG0uQFpneQM5i533Y8o/kqnITmtT dada99@dada99-pc
+      - "$SSH_PUB_KEY"
 chpasswd:  # If not set, the system will ask you to setup password for default user
   list: |
     dada99:passw0rd
