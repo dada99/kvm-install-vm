@@ -35,8 +35,6 @@ BRIDGE=virbr0
 
 #SSH Public key file used to inject into VM
 SSH_PUB_KEY_FILE="$DIR/ssh_keys/id_rsa.pub"
-DIR=`pwd`
-SSH_PUB_KEY_FILE="$DIR/ssh_keys/id_rsa.pub"
 while IFS= read -r line
 do
   #echo "$line"
