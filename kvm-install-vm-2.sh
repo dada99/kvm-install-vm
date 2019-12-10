@@ -3,6 +3,12 @@
 ## **Updates to this file are now at https://github.com/giovtorres/kvm-install-vm.**
 ## **This updated version has more options and less hardcoded variables.**
 
+# Usage description
+# 1st para: VM name
+# 2nd para: IP Address(should be in the same subnet with $BRIDGE)
+# 3rd para: second disk for VM,maybe used for Ceph Cluster
+
+
 # Define some constants
 
 # Directory to store images
