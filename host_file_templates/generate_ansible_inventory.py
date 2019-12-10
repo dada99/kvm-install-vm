@@ -18,7 +18,7 @@ try:
 except:
   pass
 
-template_path = '{}/templates/'.format(os.path.dirname(__file__))
+template_path = '{}/templates/{}'.format(os.path.dirname(__file__),project_type)
 loader = FileSystemLoader(template_path)
 env = Environment(loader=loader)
 k8s_group_template = env.get_template('k8s-1m-2w.j2')
@@ -30,5 +30,5 @@ for i in range(int(group_count)):
 k8s_cluster_hosts_template = env.get_template('k8s-1m-2w-hosts.j2')
 print('\n')
 for i in range(int(group_count)):
-    msg = k8s_cluster_hosts_template.render(groupnum=i,groupip=(FIRST_IP_ADDR+i*3))
+    msg = k8s_cluster_hosts_template.render(groupip=(FIRST_IP_ADDR+i*3),groupnum=i) # Out put for /etc/hosts
     print(msg)
