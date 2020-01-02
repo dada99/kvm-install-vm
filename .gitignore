@@ -3,3 +3,4 @@ tmp/
 xenial-server-cloudimg-amd64-disk1.img
 xenial-server-cloudimg-amd64-disk1-5G.img
 inventory*
+base_image/*

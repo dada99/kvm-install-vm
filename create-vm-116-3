@@ -1,11 +1,11 @@
 $ awk '{ if($1 !~ /^\[/ && $1 !~ /^ansible/ ) {split($2,res,"="); print $1}}'
 
-sudo ./kvm-install-vm-2.sh ubuntu-k8s-116-master 192.168.122.15 10G
+sudo ./kvm-install-vm-2.sh ubuntu-k8s-116-master 192.168.122.11 10G
 
-sudo ./kvm-install-vm-2.sh ubuntu-k8s-116-worker-1 192.168.122.16 10G
+sudo ./kvm-install-vm-2.sh ubuntu-k8s-116-worker-1 192.168.122.12 10G
  
-sudo ./kvm-install-vm-2.sh ubuntu-k8s-116-worker-2 192.168.122.17 10G
+sudo ./kvm-install-vm-2.sh ubuntu-k8s-116-worker-2 192.168.122.13 10G
 
-sudo ./kvm-install-vm-2.sh ubuntu-k8s-116-worker-3 192.168.122.18 10G
+sudo ./kvm-install-vm-2.sh ubuntu-k8s-116-worker-3 192.168.122.14 10G
 
 
