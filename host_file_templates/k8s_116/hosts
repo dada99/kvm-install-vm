@@ -1,0 +1,9 @@
+192.168.122.100      ubuntu-k8s_116-0-master   
+192.168.122.101    ubuntu-k8s_116-0-worker-1   
+192.168.122.102    ubuntu-k8s_116-0-worker-2    
+192.168.122.103      ubuntu-k8s_116-1-master   
+192.168.122.104    ubuntu-k8s_116-1-worker-1   
+192.168.122.105    ubuntu-k8s_116-1-worker-2    
+192.168.122.106      ubuntu-k8s_116-2-master   
+192.168.122.107    ubuntu-k8s_116-2-worker-1   
+192.168.122.108    ubuntu-k8s_116-2-worker-2    

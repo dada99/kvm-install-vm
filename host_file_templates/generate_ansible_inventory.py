@@ -26,15 +26,18 @@ k8s_group_template = env.get_template('k8s-1m-2w.j2')
 #f1 = open(my_path+'/inventory','w')
 f1 = my_path / 'inventory'
 for i in range(int(group_count)):
-    msg = k8s_group_template.render(groupnum=i,groupip=(FIRST_IP_ADDR+i*3)) # Output for Ansible inventory file
+    msg = k8s_group_template.render(groupnum=i,groupip=(FIRST_IP_ADDR+i*3),p_name=project_name) # Output for Ansible inventory file
     print(msg)
-    with f1.open('w') as f:
+    with f1.open('a') as f:
         f.write(msg)
+        f.write('\n')
+
 f2 = my_path / 'hosts'
 k8s_cluster_hosts_template = env.get_template('k8s-1m-2w-hosts.j2')
 print('\n')
 for i in range(int(group_count)):
-    msg = k8s_cluster_hosts_template.render(groupip=(FIRST_IP_ADDR+i*3),groupnum=i) # Output for /etc/hosts
+    msg = k8s_cluster_hosts_template.render(groupip=(FIRST_IP_ADDR+i*3),groupnum=i,p_name=project_name) # Output for /etc/hosts
     print(msg)
-    with f2.open('w') as f:
+    with f2.open('a') as f:
         f.write(msg)
+        f.write('\n')
